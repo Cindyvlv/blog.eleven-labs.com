@@ -67,6 +67,8 @@ export const useLayoutTemplateContainer = (): Omit<LayoutTemplateProps, 'childre
   useLink({ rel: 'apple-touch-icon', sizes: '152x152', href: getPathFile('/imgs/icons/apple-icon-152x152.png') });
   useLink({ rel: 'apple-touch-icon', sizes: '180x180', href: getPathFile('/imgs/icons/apple-icon-180x180.png') });
 
+  useLink({ rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/feed.xml' });
+
   useEffect(() => {
     setCookieConstent(createPortal(<CookieConsentContainer />, document.body));
   }, []);
