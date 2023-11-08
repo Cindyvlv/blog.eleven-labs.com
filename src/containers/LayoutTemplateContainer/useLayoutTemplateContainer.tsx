@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 
 import { themeColor } from '@/config/website';
-import { GOOGLE_SITE_VERIFICATION, HOST_URL } from '@/constants';
+import { GOOGLE_SITE_VERIFICATION, ROOT_URL } from '@/constants';
 import { PATHS } from '@/constants';
 import { CookieConsentContainer } from '@/containers/CookieConsentContainer';
 import { HeaderContainer } from '@/containers/HeaderContainer';
 import { useFooterContainer } from '@/containers/LayoutTemplateContainer/useFooterContainer';
 import { getPathFile } from '@/helpers/assetHelper';
 import { getClickEventElements, handleClickEventListener } from '@/helpers/dataLayerHelper';
+import { generateUrl } from '@/helpers/routerHelper';
 import { LayoutTemplateProps } from '@/templates/LayoutTemplate';
 
 export const useLayoutTemplateContainer = (): Omit<LayoutTemplateProps, 'children'> => {
@@ -47,14 +48,14 @@ export const useLayoutTemplateContainer = (): Omit<LayoutTemplateProps, 'childre
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Blog Eleven Labs',
-      url: HOST_URL,
+      url: ROOT_URL,
       ...(isHomePage
         ? {
             potentialAction: {
               '@type': 'SearchAction',
               target: {
                 '@type': 'EntryPoint',
-                urlTemplate: `${HOST_URL}/fr/search/?search={search_term_string}`,
+                urlTemplate: generateUrl(PATHS.SEARCH, { lang: 'fr', search: '{search_term_string}`' }),
               },
               'query-input': 'required name=search_term_string',
             },
@@ -67,7 +68,7 @@ export const useLayoutTemplateContainer = (): Omit<LayoutTemplateProps, 'childre
   useLink({ rel: 'apple-touch-icon', sizes: '152x152', href: getPathFile('/imgs/icons/apple-icon-152x152.png') });
   useLink({ rel: 'apple-touch-icon', sizes: '180x180', href: getPathFile('/imgs/icons/apple-icon-180x180.png') });
 
-  useLink({ rel: 'alternate', type: 'application/rss+xml', href: `${HOST_URL}/feed.xml` });
+  useLink({ rel: 'alternate', type: 'application/rss+xml', href: `${ROOT_URL}feed.xml` });
 
   useEffect(() => {
     setCookieConstent(createPortal(<CookieConsentContainer />, document.body));
