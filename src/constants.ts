@@ -2,6 +2,7 @@ import { getEnv } from '@/helpers/getEnvHelper';
 
 export const IS_SSR = import.meta.env.SSR;
 export const IS_PRERENDER = import.meta.env.MODE === 'prerender';
+export const HOST_URL = getEnv<string>('VITE_HOST_URL');
 export const BASE_URL = getEnv<string>('BASE_URL') || '/';
 
 export enum LanguageEnum {

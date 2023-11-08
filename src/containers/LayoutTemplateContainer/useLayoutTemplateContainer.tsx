@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 
 import { themeColor } from '@/config/website';
-import { GOOGLE_SITE_VERIFICATION } from '@/constants';
+import { GOOGLE_SITE_VERIFICATION, HOST_URL } from '@/constants';
 import { PATHS } from '@/constants';
 import { CookieConsentContainer } from '@/containers/CookieConsentContainer';
 import { HeaderContainer } from '@/containers/HeaderContainer';
@@ -47,14 +47,14 @@ export const useLayoutTemplateContainer = (): Omit<LayoutTemplateProps, 'childre
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Blog Eleven Labs',
-      url: 'https://blog.eleven-labs.com/',
+      url: HOST_URL,
       ...(isHomePage
         ? {
             potentialAction: {
               '@type': 'SearchAction',
               target: {
                 '@type': 'EntryPoint',
-                urlTemplate: 'https://blog.eleven-labs.com/fr/search/?search={search_term_string}',
+                urlTemplate: `${HOST_URL}/fr/search/?search={search_term_string}`,
               },
               'query-input': 'required name=search_term_string',
             },
@@ -67,7 +67,7 @@ export const useLayoutTemplateContainer = (): Omit<LayoutTemplateProps, 'childre
   useLink({ rel: 'apple-touch-icon', sizes: '152x152', href: getPathFile('/imgs/icons/apple-icon-152x152.png') });
   useLink({ rel: 'apple-touch-icon', sizes: '180x180', href: getPathFile('/imgs/icons/apple-icon-180x180.png') });
 
-  useLink({ rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/feed.xml' });
+  useLink({ rel: 'alternate', type: 'application/rss+xml', href: `${HOST_URL}/feed.xml` });
 
   useEffect(() => {
     setCookieConstent(createPortal(<CookieConsentContainer />, document.body));
